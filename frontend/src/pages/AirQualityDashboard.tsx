@@ -8,7 +8,7 @@ import { DateTimeSelector } from "@/components/dashboard/DateTimeSelector";
 import { AtmosphereInputs } from "@/components/dashboard/AtmosphereInputs";
 import { WindRainInputs } from "@/components/dashboard/WindRainInputs";
 import { SensorDataInputs } from "@/components/dashboard/SensorDataInputs";
-import { GaugeChart } from "@/components/dashboard/GaugeChart";
+import { BarComparisonChart } from "@/components/dashboard/BarComparisonChart";
 import ReactSpeedometer from "react-d3-speedometer";
 import { LineHistoryChart } from "@/components/dashboard/LineHistoryChart";
 import { QualityBadge } from "@/components/dashboard/QualityBadge";
@@ -298,10 +298,9 @@ const AirQualityDashboard = () => {
                   </div>
 
                   {/* Chart based on tab */}
-                  <div className="pt-4">
-                    {activeTab === "estimator" && <GaugeChart value={result} />}
-                    {activeTab === "simple" && <div className="space-y-4">
-                        <div className="flex justify-center items-center min-h-[250px]">
+                  <div className="pt-2">
+                    {activeTab === "estimator" && <div>
+                        <div className="flex justify-center items-center">
                           <ReactSpeedometer
                             maxValue={500}
                             value={result}
@@ -324,6 +323,7 @@ const AirQualityDashboard = () => {
                           />
                         </div>
                       </div>}
+                    {activeTab === "simple" && <BarComparisonChart currentValue={pm25Current} forecastValue={result} />}
                     {activeTab === "pro" && <LineHistoryChart pm25_2h_ago={pm25_2hAgo} pm25_1h_ago={pm25_1hAgo} pm25_current={pm25Current} forecast={result} />}
                   </div>
                 </div> : <div className="py-12 text-center">
