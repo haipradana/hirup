@@ -64,15 +64,15 @@ export const DateTimeSelector = ({
               Click to edit
             </span>
           </label>
-          <div className="relative">
-            <Input
+      <div className="relative">
+        <Input
               type="time"
               value={timePart}
               onChange={(e) => handleTimeChange(e.target.value)}
               className="w-full h-12 text-base pl-12 pr-10 bg-muted/30 cursor-pointer hover:bg-muted/50 hover:border-blue-500 hover:border-2 focus:border-blue-600 focus:border-2 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none transition-all"
               placeholder="Select time"
-            />
-            <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+        />
+        <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
             <Edit3 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none opacity-50 group-hover:opacity-100 group-hover:text-blue-600 transition-all" />
           </div>
         </div>

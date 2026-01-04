@@ -114,17 +114,17 @@ def predict_estimator(input_data: WeatherInput):
         raise HTTPException(status_code=503, detail="Model not loaded. Please restart the server.")
     
     try:
-        # preprocess
-        feats = preprocess_features(input_data)
-        
-        # urutkan kolom sesuai input ML
-        feature_order = ['rr', 'ws_avg', 'ws_max', 'wd_sin', 'wd_cos', 
-                         'tt_air_avg', 'rh_avg', 'sr_avg', 'pp_air', 
-                         'hour_sin', 'hour_cos', 'month_sin', 'month_cos']
-        
-        df_ready = pd.DataFrame([feats])[feature_order]
-        
-        # prediksi
+    # preprocess
+    feats = preprocess_features(input_data)
+    
+    # urutkan kolom sesuai input ML
+    feature_order = ['rr', 'ws_avg', 'ws_max', 'wd_sin', 'wd_cos', 
+                     'tt_air_avg', 'rh_avg', 'sr_avg', 'pp_air', 
+                     'hour_sin', 'hour_cos', 'month_sin', 'month_cos']
+    
+    df_ready = pd.DataFrame([feats])[feature_order]
+    
+    # prediksi
         pred_log = models['estimator'].predict(df_ready)[0]
         
         # Inverse log transform (karena model di-train dengan log1p)
@@ -145,22 +145,22 @@ def predict_simple(input_data: SimpleInput):
         raise HTTPException(status_code=503, detail="Model not loaded. Please restart the server.")
     
     try:
-        # preprocess base
-        feats = preprocess_features(input_data)
-        
-        # tambah Lag-1
-        feats['pm25_lag1'] = input_data.pm25_current
-        
-        # urutkan kolom
-        feature_order = ['rr', 'ws_avg', 'ws_max', 'wd_sin', 'wd_cos', 
-                         'tt_air_avg', 'rh_avg', 'sr_avg', 'pp_air', 
-                         'hour_sin', 'hour_cos', 'month_sin', 'month_cos', 
-                         'pm25_lag1']
-        
-        df_ready = pd.DataFrame([feats])[feature_order]
-        
+    # preprocess base
+    feats = preprocess_features(input_data)
+    
+    # tambah Lag-1
+    feats['pm25_lag1'] = input_data.pm25_current
+    
+    # urutkan kolom
+    feature_order = ['rr', 'ws_avg', 'ws_max', 'wd_sin', 'wd_cos', 
+                     'tt_air_avg', 'rh_avg', 'sr_avg', 'pp_air', 
+                     'hour_sin', 'hour_cos', 'month_sin', 'month_cos', 
+                     'pm25_lag1']
+    
+    df_ready = pd.DataFrame([feats])[feature_order]
+    
         # prediksi (simple model TIDAK pakai log transform)
-        pred = models['simple'].predict(df_ready)[0]
+    pred = models['simple'].predict(df_ready)[0]
         
         # Validate prediction
         if pred < 0:
@@ -177,24 +177,24 @@ def predict_pro(input_data: ProInput):
         raise HTTPException(status_code=503, detail="Model not loaded. Please restart the server.")
     
     try:
-        # preprocess base
-        feats = preprocess_features(input_data)
-        
-        # tambah lags
-        feats['pm25_lag1'] = input_data.pm25_current
-        feats['pm25_lag2'] = input_data.pm25_1h_ago
-        feats['pm25_lag3'] = input_data.pm25_2h_ago
-        
-        # urutkan kolom
-        feature_order = ['rr', 'ws_avg', 'ws_max', 'wd_sin', 'wd_cos', 
-                         'tt_air_avg', 'rh_avg', 'sr_avg', 'pp_air', 
-                         'hour_sin', 'hour_cos', 'month_sin', 'month_cos', 
-                         'pm25_lag1', 'pm25_lag2', 'pm25_lag3']
-        
-        df_ready = pd.DataFrame([feats])[feature_order]
-        
+    # preprocess base
+    feats = preprocess_features(input_data)
+    
+    # tambah lags
+    feats['pm25_lag1'] = input_data.pm25_current
+    feats['pm25_lag2'] = input_data.pm25_1h_ago
+    feats['pm25_lag3'] = input_data.pm25_2h_ago
+    
+    # urutkan kolom
+    feature_order = ['rr', 'ws_avg', 'ws_max', 'wd_sin', 'wd_cos', 
+                     'tt_air_avg', 'rh_avg', 'sr_avg', 'pp_air', 
+                     'hour_sin', 'hour_cos', 'month_sin', 'month_cos', 
+                     'pm25_lag1', 'pm25_lag2', 'pm25_lag3']
+    
+    df_ready = pd.DataFrame([feats])[feature_order]
+    
         # prediksi (pro model TIDAK pakai log transform)
-        pred = models['pro'].predict(df_ready)[0]
+    pred = models['pro'].predict(df_ready)[0]
         
         # Validate prediction
         if pred < 0:

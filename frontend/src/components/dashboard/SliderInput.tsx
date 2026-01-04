@@ -49,7 +49,7 @@ export const SliderInput = ({
             min={min}
             max={max}
             step={step}
-            className="w-20 h-9 text-center text-sm font-medium"
+            className="w-20 h-9 text-center text-sm font-medium focus-visible:ring-blue-500 focus-visible:ring-2"
           />
           {unit && (
             <span className="text-xs text-muted-foreground w-10">{unit}</span>
