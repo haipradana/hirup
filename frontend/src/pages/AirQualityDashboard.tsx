@@ -167,9 +167,9 @@ const AirQualityDashboard = () => {
       case "estimator":
         return "Estimasi Berbasis Cuaca";
       case "simple":
-        return "Prediksi Cepat";
+        return "Prediksi Cepat Besok";
       case "pro":
-        return "Prediksi Presisi";
+        return "Prediksi Presisi Besok";
     }
   };
   const getTabDescription = () => {
@@ -320,8 +320,20 @@ const AirQualityDashboard = () => {
                           />
                         </div> */}
                       </div>}
-                    {activeTab === "simple" && <BarComparisonChart currentValue={pm25Current} forecastValue={result} />}
-                    {activeTab === "pro" && <LineHistoryChart pm25_1h_ago={pm25_1hAgo} pm25_current={pm25Current} forecast={result} />}
+                    {activeTab === "simple" && <div>
+                        {/* Boy Image Display - Replace Bar Chart */}
+                        <BoyImageDisplay value={result} />
+                        
+                        {/* BAR CHART COMMENTED - Keep for reference */}
+                        {/* <BarComparisonChart currentValue={pm25Current} forecastValue={result} /> */}
+                      </div>}
+                    {activeTab === "pro" && <div>
+                        {/* Boy Image Display - Replace Line Chart */}
+                        <BoyImageDisplay value={result} />
+                        
+                        {/* LINE CHART COMMENTED - Keep for reference */}
+                        {/* <LineHistoryChart pm25_1h_ago={pm25_1hAgo} pm25_current={pm25Current} forecast={result} /> */}
+                      </div>}
                   </div>
                 </div> : <div className="py-12 text-center">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
