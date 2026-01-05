@@ -49,7 +49,6 @@ const AirQualityDashboard = () => {
   // Sensor data state
   const [pm25Current, setPm25Current] = useState(18);
   const [pm25_1hAgo, setPm25_1hAgo] = useState(17);
-  const [pm25_2hAgo, setPm25_2hAgo] = useState(23);
 
   // Result state
   const [result, setResult] = useState<number | null>(null);
@@ -144,8 +143,7 @@ const AirQualityDashboard = () => {
       const params: ProParams = {
         ...weatherParams,
         pm25_current: pm25Current,
-        pm25_1h_ago: pm25_1hAgo,
-        pm25_2h_ago: pm25_2hAgo
+        pm25_1h_ago: pm25_1hAgo
       };
       proMutation.mutate(params);
     }
@@ -161,7 +159,6 @@ const AirQualityDashboard = () => {
     setRainfall(0);
     setPm25Current(35);
     setPm25_1hAgo(48);
-    setPm25_2hAgo(35);
     setResult(null);
   };
   const getTabTitle = () => {
@@ -177,11 +174,11 @@ const AirQualityDashboard = () => {
   const getTabDescription = () => {
     switch (activeTab) {
       case "estimator":
-        return "Simulasi nilai PM2.5 hanya menggunakan variabel meteorologi tanpa sensor kualitas udara PM2.5";
+        return "Estimasi nilai PM2.5 hari ini hanya menggunakan variabel cuaca tanpa sensor kualitas udara PM2.5";
       case "simple":
-        return "Memanfaatkan data sensor saat ini untuk memberikan prediksi PM2.5 dalam 1 jam mendatang.";
+        return "Memanfaatkan data sensor saat ini untuk memberikan prediksi PM2.5 esok hari.";
       case "pro":
-        return "Prediksi PM2.5 menggunakan rekam jejak sensor 3 jam terakhir untuk meminimalisir kesalahan prediksi akibat fluktuasi cuaca";
+        return "Prediksi PM2.5 menggunakan rekam jejak sensor hari ini dan kemarin untuk meminimalisir kesalahan prediksi akibat fluktuasi cuaca";
     }
   };
   return <div className="min-h-screen bg-background">
@@ -190,7 +187,7 @@ const AirQualityDashboard = () => {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img 
-              src="/hirup-pm25.png" 
+              src="/bmkg-hirup-pm25.png" 
               alt="HIRUP Logo" 
               className="h-10 w-auto object-contain"
             />
@@ -214,10 +211,10 @@ const AirQualityDashboard = () => {
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800">
               <MapPin className="w-4 h-4 text-blue-600" />
               <span className="text-sm font-medium text-blue-700 dark:text-blue-400 hidden sm:inline">
-                Stasiun Klimatologi Mlati
+                Stasiun Klimatologi DI Yogyakarta
               </span>
               <span className="text-sm font-medium text-blue-700 dark:text-blue-400 sm:hidden">
-                Staklim Mlati
+                Staklim DI Yogyakarta
               </span>
             </div>
           </div>
@@ -268,7 +265,7 @@ const AirQualityDashboard = () => {
             <WindRainInputs windSpeedAvg={windSpeedAvg} setWindSpeedAvg={setWindSpeedAvg} windSpeedMax={windSpeedMax} setWindSpeedMax={setWindSpeedMax} windDirection={windDirection} setWindDirection={setWindDirection} rainfall={rainfall} setRainfall={setRainfall} />
 
             {/* Sensor Data - Only for Simple and Pro */}
-            {(activeTab === "simple" || activeTab === "pro") && <SensorDataInputs pm25Current={pm25Current} setPm25Current={setPm25Current} pm25_1hAgo={pm25_1hAgo} setPm25_1hAgo={setPm25_1hAgo} pm25_2hAgo={pm25_2hAgo} setPm25_2hAgo={setPm25_2hAgo} showHistory={activeTab === "pro"} />}
+            {(activeTab === "simple" || activeTab === "pro") && <SensorDataInputs pm25Current={pm25Current} setPm25Current={setPm25Current} pm25_1hAgo={pm25_1hAgo} setPm25_1hAgo={setPm25_1hAgo} showHistory={activeTab === "pro"} />}
           </div>
 
           {/* Right Column - Results (Sticky on Desktop) */}
@@ -324,7 +321,7 @@ const AirQualityDashboard = () => {
                         </div>
                       </div>}
                     {activeTab === "simple" && <BarComparisonChart currentValue={pm25Current} forecastValue={result} />}
-                    {activeTab === "pro" && <LineHistoryChart pm25_2h_ago={pm25_2hAgo} pm25_1h_ago={pm25_1hAgo} pm25_current={pm25Current} forecast={result} />}
+                    {activeTab === "pro" && <LineHistoryChart pm25_1h_ago={pm25_1hAgo} pm25_current={pm25Current} forecast={result} />}
                   </div>
                 </div> : <div className="py-12 text-center">
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">

@@ -1,4 +1,5 @@
 // API Configuration - Change this to your VPS IP
+// export const API_BASE_URL = "http://localhost:8000";
 export const API_BASE_URL = "https://hirup-backend.pradanayahya.me";
 
 export interface WeatherParams {
@@ -19,7 +20,6 @@ export interface SimpleParams extends WeatherParams {
 
 export interface ProParams extends SimpleParams {
   pm25_1h_ago: number;
-  pm25_2h_ago: number;
 }
 
 export interface PredictionResponse {

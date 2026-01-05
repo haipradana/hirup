@@ -1,14 +1,12 @@
 import { useMemo } from "react";
 
 interface LineHistoryChartProps {
-  pm25_2h_ago: number;
   pm25_1h_ago: number;
   pm25_current: number;
   forecast: number;
 }
 
 export const LineHistoryChart = ({
-  pm25_2h_ago,
   pm25_1h_ago,
   pm25_current,
   forecast,
@@ -22,7 +20,7 @@ export const LineHistoryChart = ({
   };
 
   const { points, path, areaPath, maxY, lineColor } = useMemo(() => {
-    const values = [pm25_2h_ago, pm25_1h_ago, pm25_current, forecast];
+    const values = [pm25_1h_ago, pm25_current, forecast];
     const maxY = Math.max(...values) * 1.3;
     const minY = 0;
     const lineColor = getColor(forecast);
@@ -31,7 +29,7 @@ export const LineHistoryChart = ({
     const chartHeight = 100;
     const padding = 20;
     
-    const xStep = (chartWidth - padding * 2) / 3;
+    const xStep = (chartWidth - padding * 2) / 2;
     
     const points = values.map((v, i) => ({
       x: padding + i * xStep,
@@ -43,12 +41,12 @@ export const LineHistoryChart = ({
       .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
       .join(" ");
 
-    const areaPath = `${path} L ${points[3].x} ${chartHeight - padding} L ${points[0].x} ${chartHeight - padding} Z`;
+    const areaPath = `${path} L ${points[2].x} ${chartHeight - padding} L ${points[0].x} ${chartHeight - padding} Z`;
 
     return { points, path, areaPath, maxY, lineColor };
-  }, [pm25_2h_ago, pm25_1h_ago, pm25_current, forecast]);
+  }, [pm25_1h_ago, pm25_current, forecast]);
 
-  const labels = ["-2h", "-1h", "Now", "+1h"];
+  const labels = ["-1h", "Now", "+1h"];
 
   return (
     <div className="w-full max-w-[280px] mx-auto">
