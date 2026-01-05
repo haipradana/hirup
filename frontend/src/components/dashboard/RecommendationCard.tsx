@@ -21,11 +21,11 @@ export const RecommendationCard = ({ pm25Value }: RecommendationCardProps) => {
     if (value <= 55.4) {
       return {
         level: "Sedang",
-        ispu: "15.5 - 55.4",
-        color: "#eab308",
-        bgColor: "bg-yellow-50 dark:bg-yellow-950/20",
-        borderColor: "border-yellow-200 dark:border-yellow-800",
-        iconColor: "text-yellow-600",
+        ispu: "15.6 - 55.4",
+        color: "#3b82f6",
+        bgColor: "bg-blue-50 dark:bg-blue-950/20",
+        borderColor: "border-blue-200 dark:border-blue-800",
+        iconColor: "text-blue-600",
         explanation: "Tingkat kualitas udara yang tidak berpengaruh pada kesehatan manusia ataupun hewan tetapi berpengaruh pada tumbuhan yang peka dan nilai estetika.",
         recommendation: "Kelompok sensitif (anak-anak, lansia, ibu hamil) sebaiknya mulai membatasi aktivitas di luar ruangan yang terlalu lama."
       };
@@ -34,10 +34,10 @@ export const RecommendationCard = ({ pm25Value }: RecommendationCardProps) => {
       return {
         level: "Tidak Sehat",
         ispu: "55.5 - 150.4",
-        color: "#f97316",
-        bgColor: "bg-orange-50 dark:bg-orange-950/20",
-        borderColor: "border-orange-200 dark:border-orange-800",
-        iconColor: "text-orange-600",
+        color: "#eab308",
+        bgColor: "bg-yellow-50 dark:bg-yellow-950/20",
+        borderColor: "border-yellow-200 dark:border-yellow-800",
+        iconColor: "text-yellow-600",
         explanation: "Tingkat kualitas udara yang bersifat merugikan pada manusia ataupun kelompok hewan yang peka atau dapat menimbulkan kerusakan pada tumbuhan ataupun nilai estetika.",
         recommendation: "Kelompok sensitif harus mengurangi aktivitas di luar ruangan. Masyarakat umum sebaiknya membatasi aktivitas berat di luar ruangan dan mempertimbangkan penggunaan masker."
       };

@@ -14,6 +14,7 @@ import { LineHistoryChart } from "@/components/dashboard/LineHistoryChart";
 import { QualityBadge } from "@/components/dashboard/QualityBadge";
 import { RecommendationCard } from "@/components/dashboard/RecommendationCard";
 import { LoadingSpinner } from "@/components/dashboard/LoadingSpinner";
+import { BoyImageDisplay } from "@/components/dashboard/BoyImageDisplay";
 import { predictEstimator, predictSimple, predictPro, type WeatherParams, type SimpleParams, type ProParams } from "@/lib/api";
 type TabType = "estimator" | "simple" | "pro";
 const AirQualityDashboard = () => {
@@ -280,11 +281,6 @@ const AirQualityDashboard = () => {
               </div>
 
               {isLoading ? <LoadingSpinner /> : result !== null ? <div className="space-y-6 animate-fade-in">
-                  {/* Quality Badge */}
-                  <div className="flex justify-center">
-                    <QualityBadge value={result} />
-                  </div>
-
                   {/* Big result number */}
                   <div className="text-center">
                     <p className="text-sm text-muted-foreground mb-1">PREDICTED PM2.5</p>
@@ -297,7 +293,11 @@ const AirQualityDashboard = () => {
                   {/* Chart based on tab */}
                   <div className="pt-2">
                     {activeTab === "estimator" && <div>
-                        <div className="flex justify-center items-center">
+                        {/* Boy Image Display - Replace Speedometer */}
+                        <BoyImageDisplay value={result} />
+                        
+                        {/* SPEEDOMETER COMMENTED - Keep for reference */}
+                        {/* <div className="flex justify-center items-center">
                           <ReactSpeedometer
                             maxValue={500}
                             value={result}
@@ -318,7 +318,7 @@ const AirQualityDashboard = () => {
                             height={240}
                             minValue={0}
                           />
-                        </div>
+                        </div> */}
                       </div>}
                     {activeTab === "simple" && <BarComparisonChart currentValue={pm25Current} forecastValue={result} />}
                     {activeTab === "pro" && <LineHistoryChart pm25_1h_ago={pm25_1hAgo} pm25_current={pm25Current} forecast={result} />}

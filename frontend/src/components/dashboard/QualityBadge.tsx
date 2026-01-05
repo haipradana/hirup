@@ -21,7 +21,7 @@ export const QualityBadge = ({ value, className }: QualityBadgeProps) => {
         label: "Sedang",
         className: "quality-moderate",
         icon: AlertCircle,
-        color: "bg-yellow-500 text-white",
+        color: "bg-blue-500 text-white",
       };
     }
     if (pm25 <= 150.4) {
@@ -29,7 +29,7 @@ export const QualityBadge = ({ value, className }: QualityBadgeProps) => {
         label: "Tidak Sehat",
         className: "quality-unhealthy",
         icon: AlertTriangle,
-        color: "bg-orange-500 text-white",
+        color: "bg-yellow-500 text-white",
       };
     }
     if (pm25 <= 250.4) {

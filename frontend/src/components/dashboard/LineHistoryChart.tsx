@@ -12,11 +12,11 @@ export const LineHistoryChart = ({
   forecast,
 }: LineHistoryChartProps) => {
   const getColor = (value: number) => {
-    if (value > 250.4) return "#1f2937"; // Berbahaya
-    if (value > 150.4) return "#ef4444"; // Sangat Tidak Sehat
-    if (value > 55.4) return "#f97316"; // Tidak Sehat
-    if (value > 15.5) return "#eab308"; // Sedang
-    return "#4ade80"; // Baik
+    if (value > 250.4) return "#1f2937"; // Berbahaya (Hitam)
+    if (value > 150.4) return "#ef4444"; // Sangat Tidak Sehat (Merah)
+    if (value > 55.4) return "#eab308"; // Tidak Sehat (Kuning)
+    if (value > 15.5) return "#3b82f6"; // Sedang (Biru)
+    return "#4ade80"; // Baik (Hijau)
   };
 
   const { points, path, areaPath, maxY, lineColor } = useMemo(() => {
