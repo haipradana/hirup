@@ -15,6 +15,7 @@ import { QualityBadge } from "@/components/dashboard/QualityBadge";
 import { RecommendationCard } from "@/components/dashboard/RecommendationCard";
 import { LoadingSpinner } from "@/components/dashboard/LoadingSpinner";
 import { BoyImageDisplay } from "@/components/dashboard/BoyImageDisplay";
+import { AirQualityLegend } from "@/components/dashboard/AirQualityLegend";
 import { predictEstimator, predictSimple, predictPro, type WeatherParams, type SimpleParams, type ProParams } from "@/lib/api";
 type TabType = "estimator" | "simple" | "pro";
 const AirQualityDashboard = () => {
@@ -273,7 +274,7 @@ const AirQualityDashboard = () => {
           <div className="space-y-6 lg:sticky lg:top-20 lg:h-fit lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:pb-6 scrollbar-thin">
             <div className="dashboard-section space-y-6">
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-foreground">Forecast Analysis</h2>
+                <h2 className="text-lg font-semibold text-foreground">Perkiraan Kualitas Udara</h2>
                 {result !== null && <div className="flex items-center gap-1.5">
                     {/* <span className="w-2 h-2 bg-success rounded-full animate-pulse-ring" />
                     <span className="text-xs text-muted-foreground">Live</span> */}
@@ -340,7 +341,7 @@ const AirQualityDashboard = () => {
                     <Wind className="w-8 h-8 text-muted-foreground" />
                   </div>
                   <p className="text-muted-foreground">
-                    Adjust parameters and run the simulation to see results
+                    Silakan atur parameter cuaca dan jalankan simulasi untuk mengetahui kondisi kualitas udara.
                   </p>
                 </div>}
             </div>
@@ -359,7 +360,7 @@ const AirQualityDashboard = () => {
                   Calculating...
                 </> : <>
                   {activeTab === "pro" ? <Play className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-                  {activeTab === "pro" ? "Run Simulation" : "Run Simulation"}
+                  {activeTab === "pro" ? "Lihat Hasil Estimasi" : "Lihat Hasil Estimasi"}
                 </>}
             </Button>
 
@@ -367,6 +368,9 @@ const AirQualityDashboard = () => {
             {lastUpdated && <p className="text-center text-xs text-muted-foreground">
                 Last updated: {lastUpdated}
               </p>}
+
+            {/* Air Quality Legend */}
+            <AirQualityLegend />
           </div>
         </div>
       </main>
