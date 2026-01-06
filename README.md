@@ -2,7 +2,7 @@
 
 **Hirup** adalah aplikasi web end-to-end untuk memprediksi kualitas udara (PM2.5) berbasis Machine Learning. Proyek ini dikembangkan sebagai First Project dalam magang di Stasiun Klimatologi Yogyakarta.
 
-**Live Demo:** [hirup.pradanayahya.me](https://bmkg-hirup.pradanayahya.me)
+**Live Demo:** [hirup.pradanayahya.me](https://bmkg-hirup.pradanayahya.com)
 
 ---
 
